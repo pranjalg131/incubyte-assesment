@@ -26,4 +26,11 @@ public class StringCalculatorTest {
         int result = stringCalculator.Add("1,2,3,4");
         assertEquals(10,result);
     }
+
+    @Test
+    public void testAddWhenInputHasMultipleOperandsAndMultipleDelimiters(){
+        StringCalculator stringCalculator = new StringCalculator();
+        int result = stringCalculator.Add("1\n2,3");
+        assertEquals(6, result);
+    }
 }
