@@ -48,4 +48,11 @@ public class StringCalculatorTest {
 
         assertEquals("Negatives are not allowed. Please remove the following numbers: [-1, -2]", exception.getMessage());
     }
+
+    @Test
+    public void testAddWhenInputHasMultipleDelimitersWithDifferentLengths() throws Exception {
+        StringCalculator stringCalculator = new StringCalculator();
+        int result = stringCalculator.Add("//[**][%%]\n1**2%%3");
+        assertEquals(6, result);
+    }
 }
