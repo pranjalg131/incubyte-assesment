@@ -87,5 +87,17 @@ public class StringCalculatorTest {
 
     // Additional Testcases
 
+    @Test
+    public void testAddWhenInputHasOnlyDelimiters() throws Exception {
+        StringCalculator stringCalculator = new StringCalculator();
+        int result = stringCalculator.Add("//;\\n;;;;");
+        assertEquals(0, result);
+    }
 
+    @Test
+    public void testAddWhenInputHasOnlyNewlines() throws Exception {
+        StringCalculator stringCalculator = new StringCalculator();
+        int result = stringCalculator.Add("\n\n\n\n");
+        assertEquals(0, result);
+    }
 }

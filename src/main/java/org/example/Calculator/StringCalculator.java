@@ -18,6 +18,9 @@ public class StringCalculator {
 
             String [] parts = numbers.split("\n");
 
+            if(parts.length < 2)
+                return 0;
+
             delimiters = parts[0];
             numbers = parts[1];
 
