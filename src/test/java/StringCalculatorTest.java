@@ -5,10 +5,25 @@ import static org.junit.jupiter.api.Assertions.*;
 public class StringCalculatorTest {
 
     @Test
-    public void testAdd(){
+    public void testAddWhenInputIsEmpty(){
 
         StringCalculator stringCalculator = new StringCalculator();
-        int result = stringCalculator.Add("1,2,3");
+        int result = stringCalculator.Add("");
         assertEquals(0, result);
+    }
+
+    @Test
+    public void testAddWhenInputHasSingleOperand(){
+
+        StringCalculator stringCalculator = new StringCalculator();
+        int result = stringCalculator.Add("1");
+        assertEquals(1,result);
+    }
+
+    @Test
+    public void testAddWhenInputHasMultipleOperand(){
+        StringCalculator stringCalculator = new StringCalculator();
+        int result = stringCalculator.Add("1,2,3,4");
+        assertEquals(10,result);
     }
 }
