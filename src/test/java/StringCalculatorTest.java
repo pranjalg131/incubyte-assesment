@@ -28,7 +28,7 @@ public class StringCalculatorTest {
     }
 
     @Test
-    public void testAddWhenInputHasMultipleOperandsAndMultipleDelimiters() throws Exception {
+    public void testAddWhenInputHasMultipleOperandsAndStandardDelimiters() throws Exception {
         StringCalculator stringCalculator = new StringCalculator();
         int result = stringCalculator.Add("1\n2,3");
         assertEquals(6, result);
@@ -50,9 +50,42 @@ public class StringCalculatorTest {
     }
 
     @Test
+    public void testAddWhenInputHasNumbersLargerThan1000() throws Exception {
+        StringCalculator stringCalculator = new StringCalculator();
+        int result = stringCalculator.Add("//;\n1;2;3;1005;35");
+        assertEquals(41,result);
+    }
+
+    @Test
+    public void testAddWhenInputHasSingleDelimiterWithLengthMoreThanOne() throws Exception {
+        StringCalculator stringCalculator = new StringCalculator();
+        int result = stringCalculator.Add("//[*****][%]\n1*****2*****3");
+        assertEquals(6, result);
+    }
+
+    @Test
+    public void testAddWhenInputHasMultipleDelimiters() throws Exception {
+        StringCalculator stringCalculator = new StringCalculator();
+        int result = stringCalculator.Add("//[*][%]\n1*2%3");
+        assertEquals(6, result);
+    }
+
+    @Test
     public void testAddWhenInputHasMultipleDelimitersWithDifferentLengths() throws Exception {
         StringCalculator stringCalculator = new StringCalculator();
         int result = stringCalculator.Add("//[**][%%]\n1**2%%3");
         assertEquals(6, result);
     }
+
+
+    @Test
+    public void testAddWhenInputHasMultipleDelimitersWithDifferentLengthsAndNumbersLargerThan1000() throws Exception {
+        StringCalculator stringCalculator = new StringCalculator();
+        int result = stringCalculator.Add("//[**][%%]\n1**2%%3**1005");
+        assertEquals(6, result);
+    }
+
+    // Additional Testcases
+
+
 }
