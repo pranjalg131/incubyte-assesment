@@ -55,6 +55,8 @@ public class StringCalculator {
                     if(number < 0){
                         negatives.add(number);
                         return 0;
+                    } else if (number > 1000){
+                        return 0;
                     }
                     return number;
                 })
