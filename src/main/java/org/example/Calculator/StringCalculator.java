@@ -8,62 +8,27 @@ import java.util.regex.Pattern;
 
 public class StringCalculator {
 
-    public int Add(String numbers) throws Exception {
+    public int Add(String input) throws Exception {
 
-        if(numbers.isEmpty()) return 0;
+        if(input.isEmpty()) return 0;
 
-        String delimiters = "[\n,]";
+        List<Integer> numbers = Utils.parseInput(input);
+        List<Integer> negatives = new ArrayList<>();
 
-        if(numbers.startsWith("//")){
+        int sum = 0;
 
-            String [] parts = numbers.split("\n");
+        for(int i = 0; i < numbers.size(); i++){
+            int currNum = numbers.get(i);
 
-            if(parts.length < 2)
-                return 0;
-
-            delimiters = parts[0];
-            numbers = parts[1];
-
-            delimiters = delimiters.replaceFirst("//", "");
-
-            if(delimiters.startsWith("[")){
-                Pattern pattern = Pattern.compile("\\[(.*?)]");
-                Matcher matcher = pattern.matcher(delimiters);
-
-                StringBuilder regexBuilder = new StringBuilder();
-                while (matcher.find()) {
-                    // Append each delimiter, escaping if necessary
-                    String delimiter = matcher.group(1);
-                    regexBuilder.append(Pattern.quote(delimiter)).append("|");
-                }
-
-                // Remove the last "|"
-                if (regexBuilder.length() > 0) {
-                    regexBuilder.setLength(regexBuilder.length() - 1); // Remove the last '|'
-                }
-
-                delimiters = regexBuilder.toString();
-
+            // Collect Negative Numbers.
+            if(currNum < 0){
+                negatives.add(currNum);
+            } else if(currNum > 1000){
+              continue;
             } else {
-                delimiters = "[" + delimiters + "]";
-            };
-
+                sum += currNum;
+            }
         }
-
-        List<Integer> negatives =  new ArrayList<>();
-
-        int sum =  Arrays.stream(numbers.split(delimiters))
-                .mapToInt(Integer::parseInt)
-                .map(number -> {
-                    if(number < 0){
-                        negatives.add(number);
-                        return 0;
-                    } else if (number > 1000){
-                        return 0;
-                    }
-                    return number;
-                })
-                .sum();
 
         if(!negatives.isEmpty()) throw new Exception("Negatives are not allowed. Please remove the following numbers: " + negatives);
 
