@@ -48,7 +48,16 @@ public class Utils {
                 regex = "[" + delimiters + "]";
             }
         }
-        
+
+          // Alternate Approach
+//        regex = "-?\\d+";
+//        Pattern pattern = Pattern.compile(regex);
+//        Matcher matcher = pattern.matcher(input);
+//
+//        while(matcher.find())
+//            numbers.add(Integer.parseInt(matcher.group()));
+
+        // Original Approach
         Arrays.stream(input.split(regex))
                 .mapToInt(Integer::parseInt)
                 .forEach(numbers::add);
